@@ -28,6 +28,14 @@ use the following command:
 ./build.sh -v
 ```
 
+<a name="QUALCOMM_build"></a>
+To build a qualcomm qaic supported ISO
+use the following command:
+
+```
+./build.sh -q
+```
+
 ### Version explained
 
 The version `dell-1.2.3-4-46ac2f1` is broken down into the following sections:
