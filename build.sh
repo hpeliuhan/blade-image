@@ -2,7 +2,7 @@
 
 print_help() {
   echo """
-usage: build.sh [-d] [-f] [-o] [-v] [-z]
+usage: build.sh [-d] [-f] [-o] [-v] [-z] [-q]
 
 Create a modified Ubuntu ISO from a base Ubuntu ISO that contains all
 neccessary packages and Waggle software tools for installation on a Dell blade.
@@ -12,6 +12,7 @@ neccessary packages and Waggle software tools for installation on a Dell blade.
   -f : force the build to proceed (debugging only) without checking for tagged commit
   -v : build the image for a test virtual machine
   -z : do a full non-cached build.
+  -q : build the image for qualcomm qaic 
   -? : print this help menu
 """
 }
@@ -24,7 +25,8 @@ FORCE=
 TTY=
 PARTITION_LAYOUT=$(cat ./iso_tools/partition_layout_dell)
 VM_MODE=
-while getopts "o:fdvz?" opt; do
+QUALCOMM_ENABLED=
+while getopts "o:fdvzq?" opt; do
   case $opt in
     o) OUTPUT_NAME=$OPTARG
       ;;
@@ -47,6 +49,10 @@ while getopts "o:fdvz?" opt; do
       echo "** EXECUTING A FULL BUILD (no cache) **"
       DOCKER_CACHE="--no-cache"
       ;;
+    q) # build qualcom ai100
+      echo "** Qualcom AI100 build**"
+      QUALCOMM_ENABLED=1
+      ;;      
     ?|*)
       print_help
       exit 1
@@ -83,6 +89,7 @@ docker build ${DOCKER_CACHE} -f Dockerfile -t blade_image_build \
     --build-arg REQ_PACKAGES="${REQ_PACKAGES}" \
     --build-arg REQ_PACKAGES_NVIDIA="${REQ_PACKAGES_NVIDIA}" \
     --build-arg PARTITION_LAYOUT="${PARTITION_LAYOUT}" \
+    --build-arg QUALCOMM_ENABLED="${QUALCOM_ENABLED}"\
     --build-arg VM_MODE="${VM_MODE}" .
 docker run $TTY --rm --privileged \
     -v ${PWD}:/output \

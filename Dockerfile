@@ -117,5 +117,14 @@ RUN if [ -n "$VM_MODE" ]; then \
     else \
     rm /ROOTFS/etc/waggle/config-vm.ini ; \
     fi
+ARG QUALCOMM_ENABLED
+RUN if [ -n "$QUALCOMM_ENABLED"]; then \
+    mkdir /qaic ; \
+    cd /qaic ; \
+    wget http://10.106.99.62/qaic/qaic-apps-1.8.1dc.27.zip ; \
+    wget http://10.106.99.62/qaic/qaic-platform-sdk-x86_64-ubuntu-1.8.1dc.27.zip ; \
+    fi
+
+
 
 COPY create_image.sh .

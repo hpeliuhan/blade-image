@@ -34,7 +34,7 @@ d-i clock-setup/ntp                                         boolean     true
 # user account setup
 d-i passwd/root-login                                       boolean     true
 d-i passwd/make-user                                        boolean     false
-d-i passwd/root-password-crypted                            password    $1$NUn6912w$dE1AyNT7qmhvWlhrKlncn.
+d-i passwd/root-password-crypted                            password    $1$Rqe4R6Xc$d33aoEvUhgz4otHfMJwbJ.
 d-i user-setup/allow-password-weak                          boolean     false
 
 # configure apt
@@ -96,4 +96,8 @@ d-i debian-installer/exit/poweroff                          boolean     false
 # setup firstrun script
 d-i preseed/late_command                                    string \
     /bin/sh /cdrom/postinst/postinst.sh ; \
-    in-target /bin/bash /etc/waggle/postinst/postinst.sh
+    in-target /bin/bash /etc/waggle/postinst/postinst.sh ;\
+    /usr/bin/unzip qaic-platform-sdk-1.8.1dc.27 ;\
+    /usr/bin/unzip qaic-platform-sdk-x86_64-ubuntu-1.8.1dc.27.zip ;\
+    in-target /bin/bash /qaic/qaic-apps-1.8.1dc.27/install.sh ;
+    in-target /bin/bash /qaic/qaic-platform-sdk-1.8.1dc.27/x86_64/ubuntu/install.sh
