@@ -16,7 +16,7 @@
 ## (already in base) ca-certificates=20210119~18.04.2
 ## (already in base) curl=7.58.0-2ubuntu3.18
 # gnupg-agent=2.2.4-1ubuntu1.6
-# software-properties-common=0.96.24.32.20
+## (already in base) software-properties-common=0.96.24.32.18
 
 ## Docker itself and requirements
 # docker-ce=5:23.0.0-1~ubuntu.18.04~bionic
@@ -169,7 +169,6 @@ python-yaml=3.12-1build2
 rpcbind=0.2.3-0.6ubuntu0.18.04.4
 smartmontools=6.5+svn4324-1ubuntu0.1
 socat=1.7.3.2-2ubuntu2
-software-properties-common=0.96.24.32.20
 sshfs=2.8-1
 sshuttle=0.78.3-1ubuntu1.1
 tree=1.7.0-5
